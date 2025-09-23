@@ -1,31 +1,268 @@
-<!-- Dashboard page -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DIU Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="/static/css/styles.css" rel="stylesheet">
-</head>
-<body class="bg-gray-100">
-    <nav class="navbar text-white p-4">
-        <div class="container mx-auto flex justify-between">
-            <h1 class="text-2xl font-bold">DIU Admission Portal</h1>
-            <div>
-                <a href="/" class="mx-2">Home</a>
-                <a href="/programs_page" class="mx-2">Programs</a>
-                <a href="/waivers_page" class="mx-2">Waivers</a>
-                <a href="/recommendations_page" class="mx-2">Recommendations</a>
-                <a href="/application_page" class="mx-2">Application</a>
-                <a href="/chat_page" class="mx-2">Chat</a>
+{% extends "base.html" %}
+
+{% block title %}Dashboard - DIU Admission Portal{% endblock %}
+
+{% block content %}
+<div id="dashboard-page" class="page-content">
+    <section class="hero">
+        <div class="main-content">
+            <div class="page-header">
+                <h1 class="page-title" style="color: white;">📊 Your Dashboard</h1>
+                <p class="page-subtitle" style="color: rgba(255,255,255,0.9);">Track your application progress and manage your profile</p>
             </div>
         </div>
-    </nav>
-    <div class="container mx-auto p-8">
-        <h2 class="text-3xl font-bold mb-4">Dashboard</h2>
-        <p class="text-gray-600">View your application status, waivers, and recommendations here.</p>
-        <!-- Add dashboard content (e.g., fetch application status) -->
-    </div>
-</body>
-</html>
+    </section>
+
+    <section class="content-section">
+        <div class="main-content">
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-number">1</div>
+                    <div class="stat-label">Applications</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Eligible Waivers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">85%</div>
+                    <div class="stat-label">Profile Complete</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">Pending</div>
+                    <div class="stat-label">Status</div>
+                </div>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">📋</div>
+                        <div>
+                            <div class="card-title">Application Status</div>
+                            <div class="card-subtitle">Track your progress</div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p><strong>Program:</strong> Computer Science & Engineering</p>
+                        <p><strong>Status:</strong> Under Review</p>
+                        <p><strong>Submitted:</strong> Dec 15, 2024</p>
+                        <p><strong>Expected Decision:</strong> Dec 30, 2024</p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn btn-primary" onclick="viewApplicationDetails()">View Details</button>
+                        <button class="btn btn-secondary" onclick="editApplication()">Edit Application</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #10b981, #059669);">💰</div>
+                        <div>
+                            <div class="card-title">Available Waivers</div>
+                            <div class="card-subtitle">Your scholarships</div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p><strong>Merit-Based:</strong> 25% (HSC GPA 4.95)</p>
+                        <p><strong>Need-Based:</strong> 15% (Eligible)</p>
+                        <p><strong>Special Category:</strong> 10% (Sports Achievement)</p>
+                        <p><strong>Total Potential:</strong> 50%</p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn btn-primary" onclick="applyForWaivers()">Apply for Waivers</button>
+                        <button class="btn btn-secondary" onclick="calculateMoreWaivers()">Calculate More</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">📚</div>
+                        <div>
+                            <div class="card-title">Recommended Programs</div>
+                            <div class="card-subtitle">Based on your profile</div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p><strong>🥇 Computer Science & Engineering</strong> - 95% Match</p>
+                        <p><strong>🥈 Software Engineering</strong> - 88% Match</p>
+                        <p><strong>🥉 Data Science</strong> - 82% Match</p>
+                        <p><strong>🎯 Artificial Intelligence</strong> - 78% Match</p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn btn-primary" onclick="getRecommendations()">Get More Recommendations</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626);">⏰</div>
+                        <div>
+                            <div class="card-title">Important Deadlines</div>
+                            <div class="card-subtitle">Upcoming events</div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p><strong>📅 Document Submission:</strong> Dec 25, 2024</p>
+                        <p><strong>🎓 Entrance Exam:</strong> Jan 5, 2025</p>
+                        <p><strong>💼 Interview:</strong> Jan 15, 2025</p>
+                        <p><strong>✅ Final Decision:</strong> Jan 30, 2025</p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn btn-primary" onclick="viewCalendar()">View Calendar</button>
+                        <button class="btn btn-secondary" onclick="setReminders()">Set Reminders</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity Section -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    <div class="card-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">📈</div>
+                    <div>
+                        <div class="card-title">Recent Activity</div>
+                        <div class="card-subtitle">Your application timeline</div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="activity-timeline">
+                        <div class="activity-item">
+                            <div class="activity-icon">✅</div>
+                            <div class="activity-content">
+                                <strong>Application Submitted</strong>
+                                <span class="activity-date">Dec 15, 2024</span>
+                                <p>Your application for Computer Science & Engineering has been successfully submitted.</p>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">💰</div>
+                            <div class="activity-content">
+                                <strong>Waivers Calculated</strong>
+                                <span class="activity-date">Dec 16, 2024</span>
+                                <p>You qualify for 3 different waiver programs totaling up to 50% tuition reduction.</p>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">📧</div>
+                            <div class="activity-content">
+                                <strong>Document Request</strong>
+                                <span class="activity-date">Dec 17, 2024</span>
+                                <p>Please upload your SSC and HSC certificates by Dec 25, 2024.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Dashboard-specific functionality
+function viewApplicationDetails() {
+    alert('📋 Application Details\n\nShowing detailed application information...');
+}
+
+function editApplication() {
+    if (confirm('Do you want to edit your application?')) {
+        window.location.href = '/application';
+    }
+}
+
+function applyForWaivers() {
+    alert('💰 Waiver Application\n\nRedirecting to waiver application page...');
+    window.location.href = '/waivers';
+}
+
+function calculateMoreWaivers() {
+    alert('🧮 Calculate Waivers\n\nOpening waiver calculator...');
+    window.location.href = '/waivers';
+}
+
+function getRecommendations() {
+    alert('🧠 AI Recommendations\n\nGetting personalized program suggestions...');
+    window.location.href = '/recommendations';
+}
+
+function viewCalendar() {
+    alert('📅 Academic Calendar\n\nShowing important dates and deadlines...');
+}
+
+function setReminders() {
+    alert('⏰ Set Reminders\n\nSetting up notification reminders...');
+}
+
+// Load dashboard data
+document.addEventListener('DOMContentLoaded', function() {
+    // Simulate loading dashboard data
+    console.log('Loading dashboard data...');
+});
+</script>
+
+<style>
+.activity-timeline {
+    border-left: 3px solid #e5e7eb;
+    margin-left: 10px;
+    padding-left: 20px;
+}
+
+.activity-item {
+    display: flex;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.activity-item:last-child {
+    margin-bottom: 0;
+}
+
+.activity-icon {
+    width: 40px;
+    height: 40px;
+    background: #f8fafc;
+    border: 2px solid #e5e7eb;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    font-size: 16px;
+}
+
+.activity-content {
+    flex: 1;
+}
+
+.activity-content strong {
+    display: block;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.activity-date {
+    color: #666;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.activity-content p {
+    color: #666;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.activity-item::before {
+    content: '';
+    position: absolute;
+    left: -23px;
+    top: 10px;
+    width: 11px;
+    height: 11px;
+    background: #667eea;
+    border-radius: 50%;
+    border: 3px solid white;
+}
+</style>
+{% endblock %}

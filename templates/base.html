@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIU Admission Portal - {% block title %}Complete Solution{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="{{ url_for('home_page') }}" class="logo">DIU Portal</a>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('programs_page') }}">Programs</a></li>
+                <li><a href="{{ url_for('waivers_page') }}">Waivers</a></li>
+                <li><a href="{{ url_for('recommendations_page') }}">AI Recommendations</a></li>
+                <li><a href="{{ url_for('application_page') }}">Apply</a></li>
+                <li><a href="{{ url_for('chat_page') }}">Chat</a></li>
+                <li><a href="{{ url_for('dashboard_page') }}">Dashboard</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="notification-btn" onclick="showNotification()">
+                    🔔
+                    <span class="notification-badge">3</span>
+                </button>
+                <div class="user-avatar" onclick="showProfile()">A</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

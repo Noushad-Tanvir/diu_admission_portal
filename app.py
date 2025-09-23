@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException, Request, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
@@ -523,32 +523,32 @@ async def home_page(request: Request):
 
 @app.get("/programs_page", response_class=HTMLResponse)
 async def programs_page(request: Request):
-    return templates.TemplateResponse("programs.html", {"request": request})
+    return templates.TemplateResponse("index.html", {"request": request})
 
 
 @app.get("/waivers_page", response_class=HTMLResponse)
 async def waivers_page(request: Request):
-    return templates.TemplateResponse("waivers.html", {"request": request})
+    return templates.TemplateResponse("index.html", {"request": request})
 
 
 @app.get("/recommendations_page", response_class=HTMLResponse)
 async def recommendations_page(request: Request):
-    return templates.TemplateResponse("recommendations.html", {"request": request})
+    return templates.TemplateResponse("index.html", {"request": request})
 
 
 @app.get("/application_page", response_class=HTMLResponse)
 async def application_page(request: Request):
-    return templates.TemplateResponse("application.html", {"request": request})
+    return templates.TemplateResponse("index.html", {"request": request})
 
 
 @app.get("/chat_page", response_class=HTMLResponse)
 async def chat_page(request: Request):
-    return templates.TemplateResponse("chat.html", {"request": request})
+    return templates.TemplateResponse("index.html", {"request": request})
 
 
 @app.get("/dashboard_page", response_class=HTMLResponse)
 async def dashboard_page(request: Request):
-    return templates.TemplateResponse("dashboard.html", {"request": request})
+    return templates.TemplateResponse("index.html", {"request": request})
 
 
 @app.get("/programs", response_model=List[Program])

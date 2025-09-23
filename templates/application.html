@@ -1,182 +1,175 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DIU Application</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="/static/css/styles.css" rel="stylesheet">
-</head>
-<body class="bg-gray-100">
-    <nav class="navbar text-white p-4">
-        <div class="container mx-auto flex justify-between">
-            <h1 class="text-2xl font-bold">DIU Admission Portal</h1>
-            <div>
-                <a href="/" class="mx-2">Home</a>
-                <a href="/programs_page" class="mx-2">Programs</a>
-                <a href="/waivers_page" class="mx-2">Waivers</a>
-                <a href="/recommendations_page" class="mx-2">Recommendations</a>
-                <a href="/chat_page" class="mx-2">Chat</a>
-                <a href="/dashboard_page" class="mx-2">Dashboard</a>
+{% extends "base.html" %}
+
+{% block title %}Application - DIU Admission Portal{% endblock %}
+
+{% block content %}
+<div id="application-page" class="page-content">
+    <section class="hero">
+        <div class="main-content">
+            <div class="page-header">
+                <h1 class="page-title" style="color: white;">🚀 Quick Application</h1>
+                <p class="page-subtitle" style="color: rgba(255,255,255,0.9);">Complete your application in minutes with our smart form</p>
             </div>
         </div>
-    </nav>
-    <div class="container mx-auto p-8">
-        <h2 class="text-3xl font-bold mb-4">Application Form</h2>
-        <form id="application-form" class="space-y-4">
-            <div>
-                <label class="block">Student Name:</label>
-                <input type="text" name="student_name" class="form-input" required>
-            </div>
-            <div>
-                <label class="block">Email:</label>
-                <input type="email" name="email" class="form-input" required>
-            </div>
-            <div>
-                <label class="block">Phone:</label>
-                <input type="text" name="phone" class="form-input" required>
-            </div>
-            <div>
-                <label class="block">Date of Birth:</label>
-                <input type="date" name="dob" class="form-input" required>
-            </div>
-            <div>
-                <label class="block">Father's Name:</label>
-                <input type="text" name="father_name" class="form-input">
-            </div>
-            <div>
-                <label class="block">Mother's Name:</label>
-                <input type="text" name="mother_name" class="form-input">
-            </div>
-            <div>
-                <label class="block">NID:</label>
-                <input type="text" name="nid" class="form-input" required>
-            </div>
-            <div>
-                <label class="block">Gender:</label>
-                <select name="gender" class="form-input">
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-            <div>
-                <label class="block">Program Code:</label>
-                <input type="text" name="program_code" class="form-input" required>
-            </div>
-            <div>
-                <label class="block">SSC GPA:</label>
-                <input type="number" name="ssc_gpa" step="0.01" min="0" max="5" class="form-input">
-            </div>
-            <div>
-                <label class="block">HSC GPA:</label>
-                <input type="number" name="hsc_gpa" step="0.01" min="0" max="5" class="form-input">
-            </div>
-            <div>
-                <label class="block">SSC Year:</label>
-                <input type="number" name="ssc_year" class="form-input" required>
-            </div>
-            <div>
-                <label class="block">HSC Year:</label>
-                <input type="number" name="hsc_year" class="form-input" required>
-            </div>
-            <div>
-                <label class="block">SSC Board:</label>
-                <input type="text" name="ssc_board" class="form-input">
-            </div>
-            <div>
-                <label class="block">HSC Board:</label>
-                <input type="text" name="hsc_board" class="form-input">
-            </div>
-            <div>
-                <label class="block">SSC Group:</label>
-                <input type="text" name="ssc_group" class="form-input">
-            </div>
-            <div>
-                <label class="block">HSC Group:</label>
-                <input type="text" name="hsc_group" class="form-input">
-            </div>
-            <div>
-                <label class="block">Family Income:</label>
-                <input type="number" name="family_income" class="form-input">
-            </div>
-            <div>
-                <label class="block">Freedom Fighter Child:</label>
-                <input type="checkbox" name="is_freedom_fighter_child" class="form-input">
-            </div>
-            <div>
-                <label class="block">DIU Employee Relative:</label>
-                <input type="checkbox" name="is_diu_employee_relative" class="form-input">
-            </div>
-            <div>
-                <label class="block">Sports Achievement:</label>
-                <input type="checkbox" name="has_sports_achievement" class="form-input">
-            </div>
-            <div>
-                <label class="block">Diploma Holder:</label>
-                <input type="checkbox" name="has_diploma" class="form-input">
-            </div>
-            <div>
-                <label class="block">International Student:</label>
-                <input type="checkbox" name="is_international_student" class="form-input">
-            </div>
-            <div>
-                <label class="block">Group Admission:</label>
-                <input type="checkbox" name="group_admission" class="form-input">
-            </div>
-            <button type="submit" class="btn-primary">Submit Application</button>
-        </form>
-        <div id="application-result" class="mt-4"></div>
-    </div>
-    <script>
-        document.getElementById('application-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const formData = new FormData(e.target);
-            const data = {
-                student_name: formData.get('student_name'),
-                email: formData.get('email'),
-                phone: formData.get('phone'),
-                dob: formData.get('dob'),
-                father_name: formData.get('father_name') || '',
-                mother_name: formData.get('mother_name') || '',
-                nid: formData.get('nid'),
-                gender: formData.get('gender'),
-                program_code: formData.get('program_code'),
-                ssc_gpa: parseFloat(formData.get('ssc_gpa')) || null,
-                hsc_gpa: parseFloat(formData.get('hsc_gpa')) || null,
-                ssc_year: parseInt(formData.get('ssc_year')),
-                hsc_year: parseInt(formData.get('hsc_year')),
-                ssc_board: formData.get('ssc_board') || '',
-                hsc_board: formData.get('hsc_board') || '',
-                ssc_group: formData.get('ssc_group') || '',
-                hsc_group: formData.get('hsc_group') || '',
-                family_income: parseFloat(formData.get('family_income')) || null,
-                is_freedom_fighter_child: formData.get('is_freedom_fighter_child') === 'on',
-                is_diu_employee_relative: formData.get('is_diu_employee_relative') === 'on',
-                has_sports_achievement: formData.get('has_sports_achievement') === 'on',
-                has_diploma: formData.get('has_diploma') === 'on',
-                is_international_student: formData.get('is_international_student') === 'on',
-                group_admission: formData.get('group_admission') === 'on',
-                documents_submitted: []
-            };
-            try {
-                const response = await fetch('/applications', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-                const result = await response.json();
-                document.getElementById('application-result').innerHTML = `
-                    <div class="card bg-white p-4 rounded shadow">
-                        <p>Application Submitted! ID: ${result.id}</p>
-                        <p>Status: ${result.application_status}</p>
+    </section>
+
+    <section class="content-section">
+        <div class="main-content">
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="card">
+                    <h3 style="text-align: center; margin-bottom: 30px;">📝 Application Form</h3>
+
+                    <form id="application-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label">👤 Full Name</label>
+                                <input type="text" name="student_name" class="form-input" placeholder="Enter your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">📧 Email Address</label>
+                                <input type="email" name="email" class="form-input" placeholder="your.email@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">📱 Phone Number</label>
+                                <input type="tel" name="phone" class="form-input" placeholder="+880 1XXX XXXXXX" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">📅 Date of Birth</label>
+                                <input type="date" name="dob" class="form-input" required>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>👨‍👩‍👦 Family Information</h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label class="form-label">Father's Name</label>
+                                    <input type="text" name="father_name" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Mother's Name</label>
+                                    <input type="text" name="mother_name" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">🆔 NID Number</label>
+                                    <input type="text" name="nid" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">👤 Gender</label>
+                                    <select name="gender" class="form-select" required>
+                                        <option value="">Select Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>📚 Academic Information</h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label class="form-label">🎓 Preferred Program</label>
+                                    <select name="program_code" class="form-select" required>
+                                        <option value="">Select Program</option>
+                                        <option value="CSE">Computer Science & Engineering</option>
+                                        <option value="EEE">Electrical & Electronic Engineering</option>
+                                        <option value="BBA">Business Administration</option>
+                                        <option value="LLB">Law</option>
+                                        <option value="B.ARCH">Architecture</option>
+                                        <option value="B.PHARM">Pharmacy</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">📊 SSC GPA</label>
+                                    <input type="number" name="ssc_gpa" step="0.01" min="0" max="5" class="form-input" placeholder="4.50">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">📊 HSC GPA</label>
+                                    <input type="number" name="hsc_gpa" step="0.01" min="0" max="5" class="form-input" placeholder="4.80">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">📅 SSC Year</label>
+                                    <input type="number" name="ssc_year" class="form-input" min="2000" max="2025" placeholder="2020">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">📅 HSC Year</label>
+                                    <input type="number" name="hsc_year" class="form-input" min="2000" max="2025" placeholder="2022">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">🏛️ SSC Board</label>
+                                    <input type="text" name="ssc_board" class="form-input" placeholder="Dhaka">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">🏛️ HSC Board</label>
+                                    <input type="text" name="hsc_board" class="form-input" placeholder="Dhaka">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">📚 SSC Group</label>
+                                    <input type="text" name="ssc_group" class="form-input" placeholder="Science">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">📚 HSC Group</label>
+                                    <input type="text" name="hsc_group" class="form-input" placeholder="Science">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">💰 Family Income (Monthly)</label>
+                                    <input type="number" name="family_income" class="form-input" placeholder="50000">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>⭐ Special Information</h3>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" name="is_freedom_fighter_child" id="app-freedom-fighter">
+                                    <label for="app-freedom-fighter">🏆 Freedom Fighter's Child</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" name="is_diu_employee_relative" id="app-diu-employee">
+                                    <label for="app-diu-employee">🏢 DIU Employee Relative</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" name="has_sports_achievement" id="app-sports">
+                                    <label for="app-sports">🏅 Sports Achievement</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" name="has_diploma" id="app-diploma">
+                                    <label for="app-diploma">📜 Diploma Holder</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" name="is_international_student" id="app-international">
+                                    <label for="app-international">🌍 International Student</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" name="group_admission" id="app-group">
+                                    <label for="app-group">👥 Group Admission (5+)</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-full" style="margin-top: 30px; padding: 15px;">
+                            🚀 Submit Application
+                        </button>
+                    </form>
+                </div>
+
+                <div id="application-success" class="results-section hidden">
+                    <div class="card" style="text-align: center; background: linear-gradient(135deg, #10b981, #059669); color: white;">
+                        <div style="font-size: 4rem; margin-bottom: 20px;">🎉</div>
+                        <h3 style="color: white; margin-bottom: 15px;">Application Submitted Successfully!</h3>
+                        <p style="color: rgba(255,255,255,0.9); margin-bottom: 30px;">
+                            Your application has been received. We'll contact you soon with updates.
+                        </p>
+                        <a href="{{ url_for('dashboard') }}" class="btn" style="background: white; color: #10b981;">
+                            View Dashboard
+                        </a>
                     </div>
-                `;
-            } catch (error) {
-                console.error('Error:', error);
-                document.getElementById('application-result').innerHTML = `<p class="text-red-500">Error submitting application</p>`;
-            }
-        });
-    </script>
-</body>
-</html>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

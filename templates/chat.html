@@ -1,57 +1,45 @@
-<!-- Chat interface page -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DIU Chat</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="/static/css/styles.css" rel="stylesheet">
-</head>
-<body class="bg-gray-100">
-    <nav class="navbar text-white p-4">
-        <div class="container mx-auto flex justify-between">
-            <h1 class="text-2xl font-bold">DIU Admission Portal</h1>
-            <div>
-                <a href="/" class="mx-2">Home</a>
-                <a href="/programs_page" class="mx-2">Programs</a>
-                <a href="/waivers_page" class="mx-2">Waivers</a>
-                <a href="/recommendations_page" class="mx-2">Recommendations</a>
-                <a href="/application_page" class="mx-2">Application</a>
-                <a href="/dashboard_page" class="mx-2">Dashboard</a>
+{% extends "base.html" %}
+
+{% block title %}DIU Assistant - DIU Admission Portal{% endblock %}
+
+{% block content %}
+<div id="chat-page" class="page-content">
+    <section class="hero">
+        <div class="main-content">
+            <div class="page-header">
+                <h1 class="page-title" style="color: white;">💬 DIU Assistant</h1>
+                <p class="page-subtitle" style="color: rgba(255,255,255,0.9);">Get instant answers to your admission questions</p>
             </div>
         </div>
-    </nav>
-    <div class="container mx-auto p-8">
-        <h2 class="text-3xl font-bold mb-4">Chat with DIU Bot</h2>
-        <div id="chat-box" class="h-96 overflow-y-auto bg-white p-4 rounded shadow mb-4"></div>
-        <form id="chat-form" class="flex space-x-2">
-            <input type="text" name="message" class="form-input flex-grow" placeholder="Ask a question...">
-            <button type="submit" class="btn-primary">Send</button>
-        </form>
-    </div>
-    <script>
-        const sessionId = Date.now().toString();
-        document.getElementById('chat-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const formData = new FormData(e.target);
-            const data = { message: formData.get('message'), session_id: sessionId };
-            const chatBox = document.getElementById('chat-box');
-            chatBox.innerHTML += `<div class="bg-blue-100 p-2 rounded mb-2 text-right">${data.message}</div>`;
-            try {
-                const response = await fetch('/chat', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-                const result = await response.json();
-                chatBox.innerHTML += `<div class="bg-gray-100 p-2 rounded mb-2">${result.response}</div>`;
-                chatBox.scrollTop = chatBox.scrollHeight;
-            } catch (error) {
-                console.error('Error:', error);
-            }
-            e.target.reset();
-        });
-    </script>
-</body>
-</html>
+    </section>
+
+    <section class="content-section">
+        <div class="main-content">
+            <div class="chat-container">
+                <div class="chat-messages" id="chat-messages">
+                    <div class="chat-message bot">
+                        Hi! I'm your DIU Assistant. I can help you with admission requirements, program information, deadlines, and more. What would you like to know?
+                    </div>
+                </div>
+
+                <form class="chat-input-form" id="chat-form">
+                    <input type="text" name="message" class="chat-input" placeholder="Ask me anything about admissions..." required>
+                    <button type="submit" class="chat-send-btn">Send</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Chat-specific functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const chatForm = document.getElementById('chat-form');
+    if (chatForm) {
+        chatForm.addEventListener('submit', handleChatMessage);
+    }
+});
+</script>
+{% endblock %}

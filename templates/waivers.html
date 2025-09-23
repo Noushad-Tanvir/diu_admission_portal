@@ -1,132 +1,99 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DIU Waivers</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="/static/css/styles.css" rel="stylesheet">
-</head>
-<body class="bg-gray-100">
-    <nav class="navbar text-white p-4">
-        <div class="container mx-auto flex justify-between">
-            <h1 class="text-2xl font-bold">DIU Admission Portal</h1>
-            <div>
-                <a href="/" class="mx-2">Home</a>
-                <a href="/programs_page" class="mx-2">Programs</a>
-                <a href="/recommendations_page" class="mx-2">Recommendations</a>
-                <a href="/application_page" class="mx-2">Application</a>
-                <a href="/chat_page" class="mx-2">Chat</a>
-                <a href="/dashboard_page" class="mx-2">Dashboard</a>
+{% extends "base.html" %}
+
+{% block title %}Waiver Calculator - DIU Admission Portal{% endblock %}
+
+{% block content %}
+<div id="waivers-page" class="page-content">
+    <section class="hero">
+        <div class="main-content">
+            <div class="page-header">
+                <h1 class="page-title" style="color: white;">Smart Waiver Calculator</h1>
+                <p class="page-subtitle" style="color: rgba(255,255,255,0.9);">Calculate your potential scholarship and waivers instantly using AI</p>
             </div>
         </div>
-    </nav>
-    <div class="container mx-auto p-8">
-        <h2 class="text-3xl font-bold mb-4">Waiver Calculator</h2>
-        <form id="waiver-form" class="space-y-4">
-            <div>
-                <label class="block">Department:</label>
-                <select name="faculty" class="form-input">
-                    <option value="ICE">Information and Communication Engineering</option>
-                    <option value="CSE">Computer Science and Engineering</option>
-                    <option value="EEE">Electrical and Electronic Engineering</option>
-                    <option value="TE">Textile Engineering</option>
-                    <option value="BBA">Business Administration</option>
-                    <option value="LLB">Law</option>
-                    <option value="B.PHARM">Pharmacy</option>
-                    <option value="ARCH">Architecture</option>
-                    <option value="ENG">English</option>
-                    <option value="PH">Public Health</option>
-                    <option value="SWE">Software Engineering</option>
-                    <option value="CE">Civil Engineering</option>
-                    <option value="ESM">Environmental Science and Management</option>
-                    <option value="THM">Tourism and Hospitality Management</option>
-                    <option value="NFE">Nutrition and Food Engineering</option>
-                    <option value="JMC">Journalism and Mass Communication</option>
-                </select>
-            </div>
-            <div>
-                <label class="block">SSC GPA:</label>
-                <input type="number" name="ssc_gpa" step="0.01" min="0" max="5" class="form-input">
-            </div>
-            <div>
-                <label class="block">HSC GPA:</label>
-                <input type="number" name="hsc_gpa" step="0.01" min="0" max="5" class="form-input">
-            </div>
-            <div>
-                <label class="block">Family Income (BDT/month):</label>
-                <input type="number" name="family_income" class="form-input">
-            </div>
-            <div>
-                <label class="block">Freedom Fighter Child:</label>
-                <input type="checkbox" name="is_freedom_fighter_child" class="form-input">
-            </div>
-            <div>
-                <label class="block">DIU Employee Relative:</label>
-                <input type="checkbox" name="is_diu_employee_relative" class="form-input">
-            </div>
-            <div>
-                <label class="block">Sports Achievement:</label>
-                <input type="checkbox" name="has_sports_achievement" class="form-input">
-            </div>
-            <div>
-                <label class="block">Diploma Holder:</label>
-                <input type="checkbox" name="has_diploma" class="form-input">
-            </div>
-            <div>
-                <label class="block">International Student:</label>
-                <input type="checkbox" name="is_international_student" class="form-input">
-            </div>
-            <div>
-                <label class="block">Group Admission (5+ students):</label>
-                <input type="checkbox" name="group_admission" class="form-input">
-            </div>
-            <button type="submit" class="btn-primary">Calculate Waivers</button>
-        </form>
-        <div id="waiver-results" class="mt-4"></div>
-    </div>
-    <script>
-        document.getElementById('waiver-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const formData = new FormData(e.target);
-            const data = {
-                faculty: formData.get('faculty'),
-                ssc_gpa: parseFloat(formData.get('ssc_gpa')),
-                hsc_gpa: parseFloat(formData.get('hsc_gpa')),
-                is_new_student: true,
-                student_profile: {
-                    family_income: parseFloat(formData.get('family_income')) || null,
-                    is_freedom_fighter_child: formData.get('is_freedom_fighter_child') === 'on',
-                    is_diu_employee_relative: formData.get('is_diu_employee_relative') === 'on',
-                    has_sports_achievement: formData.get('has_sports_achievement') === 'on',
-                    has_diploma: formData.get('has_diploma') === 'on',
-                    is_international_student: formData.get('is_international_student') === 'on',
-                    group_admission: formData.get('group_admission') === 'on'
-                }
-            };
-            try {
-                const response = await fetch('/waivers/recommend', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-                const results = await response.json();
-                const resultsDiv = document.getElementById('waiver-results');
-                resultsDiv.innerHTML = results.map(w => `
-                    <div class="card bg-white p-4 rounded shadow mb-2">
-                        <p><strong>${w.name}</strong> (${w.category})</p>
-                        <p>${w.description}</p>
-                        <p><strong>Waiver:</strong> ${w.waiver_percentage}</p>
-                        <p><strong>Eligibility:</strong> ${w.eligibility_criteria.join(', ')}</p>
-                        <p><strong>Required Documents:</strong> ${w.required_documents.join(', ')}</p>
-                        <p><strong>Applicable Programs:</strong> ${w.applicable_programs.join(', ')}</p>
-                        <p><strong>SGPA Required:</strong> ${w.sgpa_required}</p>
+    </section>
+
+    <section class="content-section">
+        <div class="main-content">
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="card">
+                    <h3 style="text-align: center; margin-bottom: 30px;">💰 Calculate Your Waiver Eligibility</h3>
+
+                    <form id="waiver-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label">🏛️ Department/Faculty</label>
+                                <select name="faculty" class="form-select" required>
+                                    <option value="">Select Department</option>
+                                    <option value="CSE">Computer Science & Engineering</option>
+                                    <option value="EEE">Electrical & Electronic Engineering</option>
+                                    <option value="BBA">Business Administration</option>
+                                    <option value="LLB">Law</option>
+                                    <option value="B.ARCH">Architecture</option>
+                                    <option value="B.PHARM">Pharmacy</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">📊 SSC GPA</label>
+                                <input type="number" name="ssc_gpa" class="form-input" step="0.01" min="0" max="5" placeholder="4.50">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">📊 HSC GPA</label>
+                                <input type="number" name="hsc_gpa" class="form-input" step="0.01" min="0" max="5" placeholder="4.80">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">💵 Monthly Family Income (BDT)</label>
+                                <input type="number" name="family_income" class="form-input" placeholder="50000">
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>⭐ Special Criteria</h3>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" name="is_freedom_fighter_child" id="freedom-fighter">
+                                    <label for="freedom-fighter">🏆 Freedom Fighter's Child</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" name="is_diu_employee_relative" id="diu-employee">
+                                    <label for="diu-employee">🏢 DIU Employee Relative</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" name="has_sports_achievement" id="sports">
+                                    <label for="sports">🏅 Sports Achievement</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" name="has_diploma" id="diploma">
+                                    <label for="diploma">📜 Diploma Holder</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" name="is_international_student" id="international">
+                                    <label for="international">🌍 International Student</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" name="group_admission" id="group">
+                                    <label for="group">👥 Group Admission (5+)</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-full" style="margin-top: 30px; padding: 15px;">
+                            🧮 Calculate My Waivers
+                        </button>
+                    </form>
+                </div>
+
+                <div id="waiver-results" class="results-section hidden">
+                    <div class="results-header">
+                        <h3>🎉 Your Waiver Results</h3>
                     </div>
-                `).join('');
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        });
-    </script>
-</body>
-</html>
+                    <div id="waiver-cards"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

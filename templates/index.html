@@ -1,30 +1,2186 @@
-<!-- Home page -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DIU Admission Portal - Home</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="/static/css/styles.css" rel="stylesheet">
+    <title>DIU Admission Portal - Complete Solution</title>
+    <style>
+        /* Complete self-contained styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8fafc;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            backdrop-filter: blur(20px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .logo::before {
+            content: "🎓";
+            margin-right: 10px;
+            font-size: 28px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .notification-btn {
+            position: relative;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .notification-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ff4757;
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .user-avatar:hover {
+            transform: scale(1.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #fff, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-3px);
+        }
+
+        /* Main Content Area */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .page-subtitle {
+            font-size: 1.25rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Grid Layouts */
+        .grid {
+            display: grid;
+            gap: 30px;
+        }
+
+        .grid-1 { grid-template-columns: 1fr; }
+        .grid-2 { grid-template-columns: repeat(2, 1fr); }
+        .grid-3 { grid-template-columns: repeat(3, 1fr); }
+        .grid-auto { grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid #f0f0f0;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            margin-right: 20px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .card-subtitle {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .card-content {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Forms */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-input, .form-select {
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            transform: scale(1.02);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-section {
+            border-top: 1px solid #f0f0f0;
+            padding-top: 30px;
+            margin-top: 30px;
+        }
+
+        .form-section h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 10px;
+            accent-color: #667eea;
+        }
+
+        /* Filter Tags */
+        .filter-tags {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .filter-tag {
+            padding: 8px 20px;
+            border: 2px solid #e5e7eb;
+            background: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-tag.active,
+        .filter-tag:hover {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+        }
+
+        /* Search Bar */
+        .search-bar {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 25px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            font-size: 20px;
+        }
+
+        /* Results */
+        .results-section {
+            margin-top: 40px;
+        }
+
+        .results-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .result-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid #667eea;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .result-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .result-score {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* Loading States */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Animations */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Page-specific styles */
+        .page-content {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        /* Chat specific */
+        .chat-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .chat-messages {
+            height: 400px;
+            overflow-y: auto;
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .chat-message {
+            margin-bottom: 15px;
+            padding: 12px 16px;
+            border-radius: 15px;
+            max-width: 80%;
+        }
+
+        .chat-message.user {
+            background: #667eea;
+            color: white;
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .chat-message.bot {
+            background: #f8fafc;
+            color: #333;
+            border: 1px solid #e5e7eb;
+        }
+
+        .chat-input-form {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 25px;
+            font-size: 16px;
+        }
+
+        .chat-send-btn {
+            padding: 12px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* Dashboard specific */
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .grid-auto { grid-template-columns: 1fr; }
+            .form-grid { grid-template-columns: 1fr; }
+            .filter-tags { justify-content: center; }
+            .chat-message { max-width: 90%; }
+            .dashboard-stats { grid-template-columns: repeat(2, 1fr); }
+            .page-title { font-size: 2rem; }
+        }
+
+        /* Utility Classes */
+        .hidden { display: none !important; }
+        .text-center { text-align: center; }
+        .text-left { text-align: left; }
+        .text-right { text-align: right; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mt-4 { margin-top: 1rem; }
+        .w-full { width: 100%; }
+        .flex { display: flex; }
+        .flex-1 { flex: 1; }
+        .items-center { align-items: center; }
+        .justify-center { justify-content: center; }
+        .justify-between { justify-content: space-between; }
+        .gap-4 { gap: 1rem; }
+    </style>
 </head>
-<body class="bg-gray-100">
-    <nav class="navbar text-white p-4">
-        <div class="container mx-auto flex justify-between">
-            <h1 class="text-2xl font-bold">DIU Admission Portal</h1>
-            <div>
-                <a href="/programs_page" class="mx-2">Programs</a>
-                <a href="/waivers_page" class="mx-2">Waivers</a>
-                <a href="/recommendations_page" class="mx-2">Recommendations</a>
-                <a href="/application_page" class="mx-2">Application</a>
-                <a href="/chat_page" class="mx-2">Chat</a>
-                <a href="/dashboard_page" class="mx-2">Dashboard</a>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo" onclick="showPage('home')">DIU Portal</a>
+            <ul class="nav-links">
+                <li><a href="#" onclick="showPage('programs')" id="nav-programs">Programs</a></li>
+                <li><a href="#" onclick="showPage('waivers')" id="nav-waivers">Waivers</a></li>
+                <li><a href="#" onclick="showPage('recommendations')" id="nav-recommendations">AI Recommendations</a></li>
+                <li><a href="#" onclick="showPage('application')" id="nav-application">Apply</a></li>
+                <li><a href="#" onclick="showPage('chat')" id="nav-chat">Chat</a></li>
+                <li><a href="#" onclick="showPage('dashboard')" id="nav-dashboard">Dashboard</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="notification-btn" onclick="showNotification()">
+                    🔔
+                    <span class="notification-badge">3</span>
+                </button>
+                <div class="user-avatar" onclick="showProfile()">A</div>
             </div>
         </div>
     </nav>
-    <div class="container mx-auto p-8">
-        <h2 class="text-3xl font-bold mb-4">Welcome to DIU Admission Portal</h2>
-        <p class="text-gray-600">Explore programs, calculate waivers, get department recommendations, submit applications, or chat with our bot.</p>
+
+    <!-- Home Page -->
+    <div id="home-page" class="page-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Your Journey to Success Starts Here</h1>
+                <p>Discover programs, calculate waivers, and apply to DIU with ease using our AI-powered platform</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="showPage('application')">
+                        🚀 Start Application
+                    </button>
+                    <button class="btn btn-secondary" onclick="playDemo()">
+                        ▶️ Watch Demo
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Stats -->
+        <section style="padding: 80px 20px; background: white;">
+            <div class="main-content">
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-number" id="programs-count">30+</div>
+                        <div class="stat-label">Programs Available</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">75%</div>
+                        <div class="stat-label">Max Waiver</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">10K+</div>
+                        <div class="stat-label">Students Enrolled</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">95%</div>
+                        <div class="stat-label">Success Rate</div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
+
+    <!-- Programs Page -->
+    <div id="programs-page" class="page-content hidden">
+        <section style="padding: 80px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+            <div class="main-content">
+                <div class="page-header">
+                    <h1 class="page-title" style="color: white;">Explore Our Programs</h1>
+                    <p class="page-subtitle" style="color: rgba(255,255,255,0.9);">Discover 30+ world-class programs designed for your success</p>
+                </div>
+
+                <div class="search-bar">
+                    <input type="text" id="program-search" class="search-input" placeholder="🔍 Search programs...">
+                    <span class="search-icon">🔍</span>
+                </div>
+            </div>
+        </section>
+
+        <section style="padding: 50px 20px; background: white;">
+            <div class="main-content">
+                <div class="filter-tags">
+                    <button class="filter-tag active" data-filter="all">All Programs</button>
+                    <button class="filter-tag" data-filter="undergraduate">Undergraduate</button>
+                    <button class="filter-tag" data-filter="graduate">Graduate</button>
+                    <button class="filter-tag" data-filter="engineering">Engineering</button>
+                    <button class="filter-tag" data-filter="business">Business</button>
+                </div>
+
+                <div id="programs-grid" class="grid grid-auto">
+                    <div class="loading">
+                        <div class="loading-spinner"></div>
+                        <p>Loading programs...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Waivers Page -->
+    <div id="waivers-page" class="page-content hidden">
+        <section style="padding: 80px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+            <div class="main-content">
+                <div class="page-header">
+                    <h1 class="page-title" style="color: white;">Smart Waiver Calculator</h1>
+                    <p class="page-subtitle" style="color: rgba(255,255,255,0.9);">Calculate your potential scholarship and waivers instantly using AI</p>
+                </div>
+            </div>
+        </section>
+
+        <section style="padding: 50px 20px; background: white;">
+            <div class="main-content">
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <div class="card">
+                        <h3 style="text-align: center; margin-bottom: 30px;">💰 Calculate Your Waiver Eligibility</h3>
+
+                        <form id="waiver-form">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label class="form-label">🏛️ Department/Faculty</label>
+                                    <select name="faculty" class="form-select" required>
+                                        <option value="">Select Department</option>
+                                        <option value="CSE">Computer Science & Engineering</option>
+                                        <option value="EEE">Electrical & Electronic Engineering</option>
+                                        <option value="BBA">Business Administration</option>
+                                        <option value="LLB">Law</option>
+                                        <option value="B.ARCH">Architecture</option>
+                                        <option value="B.PHARM">Pharmacy</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">📊 SSC GPA</label>
+                                    <input type="number" name="ssc_gpa" class="form-input" step="0.01" min="0" max="5" placeholder="4.50">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">📊 HSC GPA</label>
+                                    <input type="number" name="hsc_gpa" class="form-input" step="0.01" min="0" max="5" placeholder="4.80">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">💵 Monthly Family Income (BDT)</label>
+                                    <input type="number" name="family_income" class="form-input" placeholder="50000">
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h3>⭐ Special Criteria</h3>
+                                <div class="checkbox-group">
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" name="is_freedom_fighter_child" id="freedom-fighter">
+                                        <label for="freedom-fighter">🏆 Freedom Fighter's Child</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" name="is_diu_employee_relative" id="diu-employee">
+                                        <label for="diu-employee">🏢 DIU Employee Relative</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" name="has_sports_achievement" id="sports">
+                                        <label for="sports">🏅 Sports Achievement</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" name="has_diploma" id="diploma">
+                                        <label for="diploma">📜 Diploma Holder</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" name="is_international_student" id="international">
+                                        <label for="international">🌍 International Student</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" name="group_admission" id="group">
+                                        <label for="group">👥 Group Admission (5+)</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-full" style="margin-top: 30px; padding: 15px;">
+                                🧮 Calculate My Waivers
+                            </button>
+                        </form>
+                    </div>
+
+                    <div id="waiver-results" class="results-section hidden">
+                        <div class="results-header">
+                            <h3>🎉 Your Waiver Results</h3>
+                        </div>
+                        <div id="waiver-cards"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Recommendations Page -->
+    <div id="recommendations-page" class="page-content hidden">
+        <section style="padding: 80px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+            <div class="main-content">
+                <div class="page-header">
+                    <h1 class="page-title" style="color: white;">🧠 AI-Powered Recommendations</h1>
+                    <p class="page-subtitle" style="color: rgba(255,255,255,0.9);">Get personalized program suggestions based on your interests and goals</p>
+                </div>
+            </div>
+        </section>
+
+        <section style="padding: 50px 20px; background: white;">
+            <div class="main-content">
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <div class="card">
+                        <h3 style="text-align: center; margin-bottom: 30px;">🎯 Tell Us About Yourself</h3>
+
+                        <form id="recommendation-form">
+                            <div class="form-section">
+                                <h4>💡 Your Interests</h4>
+                                <div class="form-group">
+                                    <label class="form-label">What subjects or fields interest you most?</label>
+                                    <input type="text" name="interests" class="form-input"
+                                           placeholder="e.g., Programming, Business, Design, Medicine, Engineering"
+                                           required>
+                                    <small style="color: #666; font-size: 12px;">Separate multiple interests with commas</small>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h4>🎓 Academic Background</h4>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label class="form-label">HSC/A-Level Group</label>
+                                        <select name="academic_background" class="form-select" required>
+                                            <option value="">Select Your Group</option>
+                                            <option value="Science">Science</option>
+                                            <option value="Business Studies">Business Studies</option>
+                                            <option value="Humanities">Humanities</option>
+                                            <option value="A-Levels">A-Levels</option>
+                                            <option value="Diploma">Diploma</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">📊 SSC GPA</label>
+                                        <input type="number" name="ssc_gpa" class="form-input" step="0.01" min="0" max="5" placeholder="4.50">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">📊 HSC GPA</label>
+                                        <input type="number" name="hsc_gpa" class="form-input" step="0.01" min="0" max="5" placeholder="4.80">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h4>🚀 Career Goals</h4>
+                                <div class="form-group">
+                                    <label class="form-label">What career paths interest you?</label>
+                                    <input type="text" name="career_goals" class="form-input"
+                                           placeholder="e.g., Software Engineer, Business Analyst, Doctor, Architect"
+                                           required>
+                                    <small style="color: #666; font-size: 12px;">Separate multiple career goals with commas</small>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-full" style="margin-top: 30px; padding: 15px;">
+                                🧠 Get AI Recommendations
+                            </button>
+                        </form>
+                    </div>
+
+                    <div id="recommendation-results" class="results-section hidden">
+                        <div class="results-header">
+                            <h3>✨ Your Personalized Recommendations</h3>
+                        </div>
+                        <div id="recommendation-cards"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Application Page -->
+    <div id="application-page" class="page-content hidden">
+        <section style="padding: 80px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+            <div class="main-content">
+                <div class="page-header">
+                    <h1 class="page-title" style="color: white;">🚀 Quick Application</h1>
+                    <p class="page-subtitle" style="color: rgba(255,255,255,0.9);">Complete your application in minutes with our smart form</p>
+                </div>
+            </div>
+        </section>
+
+        <section style="padding: 50px 20px; background: white;">
+            <div class="main-content">
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <div class="card">
+                        <h3 style="text-align: center; margin-bottom: 30px;">📝 Application Form</h3>
+
+                        <form id="application-form">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label class="form-label">👤 Full Name</label>
+                                    <input type="text" name="student_name" class="form-input" placeholder="Enter your full name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">📧 Email Address</label>
+                                    <input type="email" name="email" class="form-input" placeholder="your.email@example.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">📱 Phone Number</label>
+                                    <input type="tel" name="phone" class="form-input" placeholder="+880 1XXX XXXXXX" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">📅 Date of Birth</label>
+                                    <input type="date" name="dob" class="form-input" required>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h3>👨‍👩‍👦 Family Information</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label class="form-label">Father's Name</label>
+                                        <input type="text" name="father_name" class="form-input" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Mother's Name</label>
+                                        <input type="text" name="mother_name" class="form-input" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">🆔 NID Number</label>
+                                        <input type="text" name="nid" class="form-input" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">👤 Gender</label>
+                                        <select name="gender" class="form-select" required>
+                                            <option value="">Select Gender</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h3>📚 Academic Information</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label class="form-label">🎓 Preferred Program</label>
+                                        <select name="program_code" class="form-select" required>
+                                            <option value="">Select Program</option>
+                                            <option value="CSE">Computer Science & Engineering</option>
+                                            <option value="EEE">Electrical & Electronic Engineering</option>
+                                            <option value="BBA">Business Administration</option>
+                                            <option value="LLB">Law</option>
+                                            <option value="B.ARCH">Architecture</option>
+                                            <option value="B.PHARM">Pharmacy</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">📊 SSC GPA</label>
+                                        <input type="number" name="ssc_gpa" step="0.01" min="0" max="5" class="form-input" placeholder="4.50">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">📊 HSC GPA</label>
+                                        <input type="number" name="hsc_gpa" step="0.01" min="0" max="5" class="form-input" placeholder="4.80">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">📅 SSC Year</label>
+                                        <input type="number" name="ssc_year" class="form-input" min="2000" max="2025" placeholder="2020">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">📅 HSC Year</label>
+                                        <input type="number" name="hsc_year" class="form-input" min="2000" max="2025" placeholder="2022">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">🏛️ SSC Board</label>
+                                        <input type="text" name="ssc_board" class="form-input" placeholder="Dhaka">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">🏛️ HSC Board</label>
+                                        <input type="text" name="hsc_board" class="form-input" placeholder="Dhaka">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">📚 SSC Group</label>
+                                        <input type="text" name="ssc_group" class="form-input" placeholder="Science">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">📚 HSC Group</label>
+                                        <input type="text" name="hsc_group" class="form-input" placeholder="Science">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">💰 Family Income (Monthly)</label>
+                                        <input type="number" name="family_income" class="form-input" placeholder="50000">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h3>⭐ Special Information</h3>
+                                <div class="checkbox-group">
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" name="is_freedom_fighter_child" id="app-freedom-fighter">
+                                        <label for="app-freedom-fighter">🏆 Freedom Fighter's Child</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" name="is_diu_employee_relative" id="app-diu-employee">
+                                        <label for="app-diu-employee">🏢 DIU Employee Relative</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" name="has_sports_achievement" id="app-sports">
+                                        <label for="app-sports">🏅 Sports Achievement</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" name="has_diploma" id="app-diploma">
+                                        <label for="app-diploma">📜 Diploma Holder</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" name="is_international_student" id="app-international">
+                                        <label for="app-international">🌍 International Student</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" name="group_admission" id="app-group">
+                                        <label for="app-group">👥 Group Admission (5+)</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-full" style="margin-top: 30px; padding: 15px;">
+                                🚀 Submit Application
+                            </button>
+                        </form>
+                    </div>
+
+                    <div id="application-success" class="results-section hidden">
+                        <div class="card" style="text-align: center; background: linear-gradient(135deg, #10b981, #059669); color: white;">
+                            <div style="font-size: 4rem; margin-bottom: 20px;">🎉</div>
+                            <h3 style="color: white; margin-bottom: 15px;">Application Submitted Successfully!</h3>
+                            <p style="color: rgba(255,255,255,0.9); margin-bottom: 30px;">
+                                Your application has been received. We'll contact you soon with updates.
+                            </p>
+                            <button class="btn" style="background: white; color: #10b981;" onclick="showPage('dashboard')">
+                                View Dashboard
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Chat Page -->
+    <div id="chat-page" class="page-content hidden">
+        <section style="padding: 80px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+            <div class="main-content">
+                <div class="page-header">
+                    <h1 class="page-title" style="color: white;">💬 DIU Assistant</h1>
+                    <p class="page-subtitle" style="color: rgba(255,255,255,0.9);">Get instant answers to your admission questions</p>
+                </div>
+            </div>
+        </section>
+
+        <section style="padding: 50px 20px; background: white;">
+            <div class="main-content">
+                <div class="chat-container">
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="chat-message bot">
+                            Hi! I'm your DIU Assistant. I can help you with admission requirements, program information, deadlines, and more. What would you like to know?
+                        </div>
+                    </div>
+
+                    <form class="chat-input-form" id="chat-form">
+                        <input type="text" name="message" class="chat-input" placeholder="Ask me anything about admissions..." required>
+                        <button type="submit" class="chat-send-btn">Send</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Dashboard Page -->
+    <div id="dashboard-page" class="page-content hidden">
+        <section style="padding: 80px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+            <div class="main-content">
+                <div class="page-header">
+                    <h1 class="page-title" style="color: white;">📊 Your Dashboard</h1>
+                    <p class="page-subtitle" style="color: rgba(255,255,255,0.9);">Track your application progress and manage your profile</p>
+                </div>
+            </div>
+        </section>
+
+        <section style="padding: 50px 20px; background: white;">
+            <div class="main-content">
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">1</div>
+                        <div class="stat-label">Applications</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Eligible Waivers</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">85%</div>
+                        <div class="stat-label">Profile Complete</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">Pending</div>
+                        <div class="stat-label">Status</div>
+                    </div>
+                </div>
+
+                <div class="grid grid-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">📋</div>
+                            <div>
+                                <div class="card-title">Application Status</div>
+                                <div class="card-subtitle">Track your progress</div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <p><strong>Program:</strong> Computer Science & Engineering</p>
+                            <p><strong>Status:</strong> Under Review</p>
+                            <p><strong>Submitted:</strong> Dec 15, 2024</p>
+                            <p><strong>Expected Decision:</strong> Dec 30, 2024</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon" style="background: linear-gradient(135deg, #10b981, #059669);">💰</div>
+                            <div>
+                                <div class="card-title">Available Waivers</div>
+                                <div class="card-subtitle">Your scholarships</div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <p><strong>Merit-Based:</strong> 25% (HSC GPA 4.95)</p>
+                            <p><strong>Need-Based:</strong> 15% (Eligible)</p>
+                            <p><strong>Total Potential:</strong> 40%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Global variables
+        let currentPage = 'home';
+        const API_BASE = '';
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 DIU Portal initialized successfully!');
+            loadPrograms();
+            setupEventListeners();
+        });
+
+        // Page navigation
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(page => page.classList.add('hidden'));
+
+            // Show selected page
+            const targetPage = document.getElementById(`${pageId}-page`);
+            if (targetPage) {
+                targetPage.classList.remove('hidden');
+                currentPage = pageId;
+
+                // Update navigation
+                updateNavigation(pageId);
+
+                // Load page-specific data
+                if (pageId === 'programs') {
+                    loadPrograms();
+                }
+            }
+        }
+
+        function updateNavigation(activePageId) {
+            // Remove active class from all nav links
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Add active class to current nav link
+            const activeNavLink = document.getElementById(`nav-${activePageId}`);
+            if (activeNavLink) {
+                activeNavLink.classList.add('active');
+            }
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Waiver form
+            const waiverForm = document.getElementById('waiver-form');
+            if (waiverForm) {
+                waiverForm.addEventListener('submit', handleWaiverCalculation);
+            }
+
+            // Recommendation form
+            const recommendationForm = document.getElementById('recommendation-form');
+            if (recommendationForm) {
+                recommendationForm.addEventListener('submit', handleRecommendations);
+            }
+
+            // Application form
+            const applicationForm = document.getElementById('application-form');
+            if (applicationForm) {
+                applicationForm.addEventListener('submit', handleApplicationSubmission);
+            }
+
+            // Chat form
+            const chatForm = document.getElementById('chat-form');
+            if (chatForm) {
+                chatForm.addEventListener('submit', handleChatMessage);
+            }
+
+            // Search functionality
+            const programSearch = document.getElementById('program-search');
+            if (programSearch) {
+                programSearch.addEventListener('input', handleProgramSearch);
+            }
+
+            // Filter tags
+            setupFilterTags();
+        }
+
+        // Programs functionality
+        async function loadPrograms() {
+            try {
+                const response = await fetch('/programs');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch programs');
+                }
+                const programs = await response.json();
+                displayPrograms(programs);
+            } catch (error) {
+                console.error('Error loading programs:', error);
+                displayProgramsError();
+            }
+        }
+
+        function displayPrograms(programs) {
+            const grid = document.getElementById('programs-grid');
+            if (!grid) return;
+
+            const programsHTML = programs.map(program => `
+                <div class="card program-card" data-type="${program.program_type.toLowerCase()}" data-dept="${program.department_code.toLowerCase()}">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">🎓</div>
+                        <div>
+                            <div class="card-title">${program.name}</div>
+                            <div class="card-subtitle">${program.department_code} • ${program.program_type}</div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p>${program.description}</p>
+                        <div style="margin: 15px 0;">
+                            <strong>💰 Cost:</strong> ${program.total_cost.toLocaleString()} BDT<br>
+                            <strong>⏱️ Duration:</strong> ${program.duration} years<br>
+                            <strong>📚 Credits:</strong> ${program.credits}
+                        </div>
+                        <div>
+                            <strong>🎯 Career Prospects:</strong><br>
+                            <small>${program.career_prospects.join(', ')}</small>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn btn-primary flex-1" onclick="viewProgramDetails('${program.code}')">View Details</button>
+                        <button class="btn btn-secondary flex-1" onclick="applyForProgram('${program.code}')">Apply Now</button>
+                    </div>
+                </div>
+            `).join('');
+
+            grid.innerHTML = programsHTML;
+        }
+
+        function displayProgramsError() {
+            const grid = document.getElementById('programs-grid');
+            if (!grid) return;
+
+            grid.innerHTML = `
+                <div class="card" style="text-align: center; color: #ef4444;">
+                    <h3>❌ Unable to load programs</h3>
+                    <p>Please try refreshing the page or contact support if the problem persists.</p>
+                </div>
+            `;
+        }
+
+        function handleProgramSearch(e) {
+            const query = e.target.value.toLowerCase();
+            const cards = document.querySelectorAll('.program-card');
+
+            cards.forEach(card => {
+                const title = card.querySelector('.card-title').textContent.toLowerCase();
+                const content = card.querySelector('.card-content').textContent.toLowerCase();
+
+                if (title.includes(query) || content.includes(query)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function setupFilterTags() {
+            const filterTags = document.querySelectorAll('.filter-tag');
+            filterTags.forEach(tag => {
+                tag.addEventListener('click', function() {
+                    // Remove active class from all tags
+                    filterTags.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const filter = this.dataset.filter;
+                    filterPrograms(filter);
+                });
+            });
+        }
+
+        function filterPrograms(filter) {
+            const cards = document.querySelectorAll('.program-card');
+
+            cards.forEach(card => {
+                if (filter === 'all') {
+                    card.style.display = 'block';
+                } else {
+                    const type = card.dataset.type;
+                    const dept = card.dataset.dept;
+
+                    if (type === filter || dept.includes(filter)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        // Waiver calculation
+        async function handleWaiverCalculation(e) {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+            const data = {
+                faculty: formData.get('faculty'),
+                ssc_gpa: parseFloat(formData.get('ssc_gpa')) || 0,
+                hsc_gpa: parseFloat(formData.get('hsc_gpa')) || 0,
+                is_new_student: true,
+                current_sgpa: 0,
+                student_profile: {
+                    family_income: parseFloat(formData.get('family_income')) || null,
+                    is_freedom_fighter_child: formData.get('is_freedom_fighter_child') === 'on',
+                    is_diu_employee_relative: formData.get('is_diu_employee_relative') === 'on',
+                    has_sports_achievement: formData.get('has_sports_achievement') === 'on',
+                    has_diploma: formData.get('has_diploma') === 'on',
+                    is_international_student: formData.get('is_international_student') === 'on',
+                    group_admission: formData.get('group_admission') === 'on'
+                }
+            };
+
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = '🔄 Calculating...';
+            submitBtn.disabled = true;
+
+            try {
+                const response = await fetch('/waivers/recommend', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to calculate waivers');
+                }
+
+                const waivers = await response.json();
+                displayWaiverResults(waivers);
+            } catch (error) {
+                console.error('Error calculating waivers:', error);
+                alert('❌ Error calculating waivers. Please try again.');
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        }
+
+        function displayWaiverResults(waivers) {
+            const resultsSection = document.getElementById('waiver-results');
+            const cardsContainer = document.getElementById('waiver-cards');
+
+            if (waivers.length === 0) {
+                cardsContainer.innerHTML = `
+                    <div class="card" style="text-align: center; background: #fef2f2; color: #dc2626;">
+                        <h3>😔 No Waivers Found</h3>
+                        <p>Based on your current information, you don't qualify for any waivers yet. Try improving your GPA or check if you have any special achievements!</p>
+                    </div>
+                `;
+            } else {
+                cardsContainer.innerHTML = waivers.map(waiver => `
+                    <div class="result-card">
+                        <div class="result-header">
+                            <div class="result-title">💰 ${waiver.name}</div>
+                            <div class="result-score">${waiver.waiver_percentage} Waiver!</div>
+                        </div>
+                        <div class="card-content">
+                            <p>${waiver.description}</p>
+                            <div style="margin: 15px 0;">
+                                <strong>✅ Eligibility:</strong>
+                                <ul style="margin-left: 20px;">
+                                    ${waiver.eligibility_criteria.map(criteria => `<li>${criteria}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <div>
+                                <strong>📋 Required Documents:</strong>
+                                <ul style="margin-left: 20px;">
+                                    ${waiver.required_documents.map(doc => `<li>${doc}</li>`).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn btn-primary flex-1" onclick="applyForWaiver('${waiver.id}')">Apply for Waiver</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            resultsSection.classList.remove('hidden');
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Recommendations
+        async function handleRecommendations(e) {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+            const data = {
+                interests: formData.get('interests').split(',').map(i => i.trim()).filter(i => i),
+                academic_background: formData.get('academic_background'),
+                career_goals: formData.get('career_goals').split(',').map(g => g.trim()).filter(g => g),
+                ssc_gpa: parseFloat(formData.get('ssc_gpa')) || 0,
+                hsc_gpa: parseFloat(formData.get('hsc_gpa')) || 0
+            };
+
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = '🧠 AI Analyzing...';
+            submitBtn.disabled = true;
+
+            try {
+                const response = await fetch('/recommendations', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to get recommendations');
+                }
+
+                const recommendations = await response.json();
+                displayRecommendations(recommendations);
+            } catch (error) {
+                console.error('Error getting recommendations:', error);
+                alert('❌ Error getting recommendations. Please try again.');
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        }
+
+        function displayRecommendations(recommendations) {
+            const resultsSection = document.getElementById('recommendation-results');
+            const cardsContainer = document.getElementById('recommendation-cards');
+
+            if (recommendations.length === 0) {
+                cardsContainer.innerHTML = `
+                    <div class="card" style="text-align: center; background: #fef2f2; color: #dc2626;">
+                        <h3>🤔 No Perfect Matches Found</h3>
+                        <p>Try expanding your interests or consider exploring different career paths. All our programs are designed to help you succeed!</p>
+                    </div>
+                `;
+            } else {
+                cardsContainer.innerHTML = recommendations.map((rec, index) => `
+                    <div class="result-card">
+                        <div class="result-header">
+                            <div class="result-title">${index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '🎯'} ${rec.department.name}</div>
+                            <div class="result-score">${Math.round(rec.match_score * 100)}% Match</div>
+                        </div>
+                        <div class="card-content">
+                            <p>${rec.department.description}</p>
+                            <div style="margin: 15px 0;">
+                                <strong>🎯 Why This Matches:</strong>
+                                <ul style="margin-left: 20px;">
+                                    ${rec.reasons.map(reason => `<li>${reason}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <div>
+                                <strong>📚 Programs:</strong><br>
+                                <small>${rec.department.programs.join(', ')}</small>
+                            </div>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn btn-primary flex-1" onclick="explorePrograms('${rec.department.name}')">Explore Programs</button>
+                            <button class="btn btn-secondary flex-1" onclick="applyForProgram('${rec.department.programs[0]}')">Apply Now</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            resultsSection.classList.remove('hidden');
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Application submission
+        async function handleApplicationSubmission(e) {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+            const data = {
+                student_name: formData.get('student_name'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                dob: formData.get('dob'),
+                father_name: formData.get('father_name'),
+                mother_name: formData.get('mother_name'),
+                nid: formData.get('nid'),
+                gender: formData.get('gender'),
+                program_code: formData.get('program_code'),
+                ssc_gpa: parseFloat(formData.get('ssc_gpa')) || 0,
+                hsc_gpa: parseFloat(formData.get('hsc_gpa')) || 0,
+                ssc_year: parseInt(formData.get('ssc_year')) || 0,
+                hsc_year: parseInt(formData.get('hsc_year')) || 0,
+                ssc_board: formData.get('ssc_board'),
+                hsc_board: formData.get('hsc_board'),
+                ssc_group: formData.get('ssc_group'),
+                hsc_group: formData.get('hsc_group'),
+                family_income: parseFloat(formData.get('family_income')) || 0,
+                is_freedom_fighter_child: formData.get('is_freedom_fighter_child') === 'on',
+                is_diu_employee_relative: formData.get('is_diu_employee_relative') === 'on',
+                has_sports_achievement: formData.get('has_sports_achievement') === 'on',
+                has_diploma: formData.get('has_diploma') === 'on',
+                is_international_student: formData.get('is_international_student') === 'on',
+                group_admission: formData.get('group_admission') === 'on',
+                documents_submitted: ['SSC Certificate', 'HSC Certificate', 'Passport Photo']
+            };
+
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = '🔄 Submitting...';
+            submitBtn.disabled = true;
+
+            try {
+                const response = await fetch('/applications', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to submit application');
+                }
+
+                const result = await response.json();
+                showApplicationSuccess(result);
+            } catch (error) {
+                console.error('Error submitting application:', error);
+                alert('❌ Error submitting application. Please try again.');
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        }
+
+        function showApplicationSuccess(result) {
+            const form = document.getElementById('application-form');
+            const successDiv = document.getElementById('application-success');
+
+            form.parentElement.classList.add('hidden');
+            successDiv.classList.remove('hidden');
+            successDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Chat functionality
+        async function handleChatMessage(e) {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+            const message = formData.get('message');
+            const sessionId = Date.now().toString();
+
+            // Add user message to chat
+            addChatMessage(message, 'user');
+
+            // Clear input
+            e.target.reset();
+
+            try {
+                const response = await fetch('/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message, session_id: sessionId })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to get chat response');
+                }
+
+                const result = await response.json();
+                addChatMessage(result.response, 'bot');
+            } catch (error) {
+                console.error('Error in chat:', error);
+                addChatMessage('Sorry, I encountered an error. Please try again.', 'bot');
+            }
+        }
+
+        function addChatMessage(message, type) {
+            const messagesContainer = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${type}`;
+            messageDiv.textContent = message;
+
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // Action handlers
+        function viewProgramDetails(programCode) {
+            alert(`📚 Program Details: ${programCode}\n\nDetailed information would be shown in a modal with:\n• Full curriculum\n• Admission requirements\n• Faculty information\n• Career outcomes`);
+        }
+
+        function applyForProgram(programCode) {
+            showPage('application');
+            // Pre-select the program if form exists
+            const programSelect = document.querySelector('select[name="program_code"]');
+            if (programSelect) {
+                programSelect.value = programCode;
+            }
+        }
+
+        function applyForWaiver(waiverID) {
+            alert(`🚀 Apply for Waiver: ${waiverID}\n\nYou would be redirected to the application form with this waiver pre-selected.`);
+            showPage('application');
+        }
+
+        function explorePrograms(departmentName) {
+            showPage('programs');
+            // Filter by department if needed
+            setTimeout(() => {
+                const searchInput = document.getElementById('program-search');
+                if (searchInput) {
+                    searchInput.value = departmentName;
+                    searchInput.dispatchEvent(new Event('input'));
+                }
+            }, 100);
+        }
+
+        function showNotification() {
+            alert('🔔 Notifications\n\n• Application deadline: 15 days left\n• New scholarship available: Merit-based 40%\n• Document upload reminder\n• Entrance exam date announced');
+        }
+
+        function showProfile() {
+            alert('👤 Profile Menu\n\n• View Profile\n• Edit Information\n• Application History\n• Settings\n• Logout');
+        }
+
+        function playDemo() {
+            alert('▶️ Demo Video\n\nA demo video would play here showing:\n• How to explore programs\n• Calculate waivers step by step\n• Complete application process\n• Track application status');
+        }
+
+        // Initialize with home page
+        window.addEventListener('load', function() {
+            showPage('home');
+        });
+
+        // Mock data for testing when backend is not available
+        const mockPrograms = [
+            {
+                id: 1,
+                name: "B.Sc. in Computer Science and Engineering",
+                code: "CSE",
+                department_code: "CSE",
+                total_cost: 720000,
+                credits: 141,
+                duration: 4,
+                description: "Covers AI, machine learning, software development, and cybersecurity with advanced labs.",
+                eligibility: ["HSC with Mathematics, minimum GPA 3.5 in SSC and HSC"],
+                career_prospects: ["Software Engineer", "Data Scientist", "AI Specialist"],
+                admission_deadline: "December 31, 2025",
+                program_type: "Undergraduate",
+                accreditation: "Institution of Engineers, Bangladesh (IEB)"
+            },
+            {
+                id: 2,
+                name: "Bachelor of Business Administration",
+                code: "BBA",
+                department_code: "BBA",
+                total_cost: 600000,
+                credits: 126,
+                duration: 4,
+                description: "Provides education in management, finance, marketing, and entrepreneurship.",
+                eligibility: ["HSC in any discipline, minimum GPA 2.5"],
+                career_prospects: ["Business Analyst", "Marketing Manager", "Entrepreneur"],
+                admission_deadline: "December 31, 2025",
+                program_type: "Undergraduate",
+                accreditation: "Accreditation Council for Business Schools and Programs (ACBSP)"
+            }
+        ];
+
+        // Load real programs from API
+        async function loadPrograms() {
+            const grid = document.getElementById('programs-grid');
+            if (!grid) return;
+
+            try {
+                const response = await fetch('/programs');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const programs = await response.json();
+                console.log('Loaded programs:', programs.length);
+                displayPrograms(programs);
+            } catch (error) {
+                console.error('Error loading programs:', error);
+                grid.innerHTML = `
+                    <div class="card" style="text-align: center; color: #ef4444;">
+                        <h3>⚠️ Connection Error</h3>
+                        <p>Unable to load programs. Please ensure your FastAPI server is running on the correct port.</p>
+                        <p><strong>Error:</strong> ${error.message}</p>
+                        <button class="btn btn-primary" onclick="loadPrograms()">Retry</button>
+                    </div>
+                `;
+            }
+        }
+
+        // Mock waiver calculation
+        function mockWaiverCalculation(data) {
+            const mockWaivers = [];
+
+            // Merit-based waivers
+            if (data.hsc_gpa >= 5.0 && data.ssc_gpa >= 5.0) {
+                mockWaivers.push({
+                    id: "golden_gpa_both",
+                    name: "Golden GPA-5 (Both SSC & HSC)",
+                    waiver_percentage: "75%",
+                    description: "75% tuition waiver for students achieving Golden GPA 5.0 in both SSC and HSC exams.",
+                    eligibility_criteria: ["SSC GPA 5.0", "HSC GPA 5.0", "Maintain SGPA 3.5"],
+                    required_documents: ["SSC transcript", "HSC transcript", "Application form"]
+                });
+            } else if (data.hsc_gpa >= 5.0) {
+                mockWaivers.push({
+                    id: "golden_gpa_hsc",
+                    name: "Golden GPA-5 (HSC Only)",
+                    waiver_percentage: "50%",
+                    description: "50% tuition waiver for students with Golden GPA 5.0 in HSC exams.",
+                    eligibility_criteria: ["HSC GPA 5.0", "Maintain SGPA 3.5"],
+                    required_documents: ["HSC transcript", "Application form"]
+                });
+            } else if (data.hsc_gpa >= 4.90) {
+                mockWaivers.push({
+                    id: "hsc_high",
+                    name: "HSC GPA 4.90-4.99",
+                    waiver_percentage: "25%",
+                    description: "25% tuition waiver for students with HSC GPA between 4.90 and 4.99.",
+                    eligibility_criteria: ["HSC GPA 4.90-4.99", "Maintain SGPA 3.25"],
+                    required_documents: ["HSC transcript", "Application form"]
+                });
+            }
+
+            // Special waivers
+            if (data.student_profile.is_freedom_fighter_child) {
+                mockWaivers.push({
+                    id: "freedom_fighter",
+                    name: "Freedom Fighter Quota Waiver",
+                    waiver_percentage: "50%",
+                    description: "50% tuition waiver for children of freedom fighters.",
+                    eligibility_criteria: ["Child of freedom fighter", "Maintain SGPA 3.0"],
+                    required_documents: ["Freedom fighter certificate", "Birth certificate", "Application form"]
+                });
+            }
+
+            if (data.student_profile.family_income && data.student_profile.family_income < 50000) {
+                mockWaivers.push({
+                    id: "need_based",
+                    name: "Need-Based Waiver",
+                    waiver_percentage: "15%",
+                    description: "15% tuition waiver for students with demonstrated financial need.",
+                    eligibility_criteria: ["Family income below 50,000 BDT/month", "Submit income certificate"],
+                    required_documents: ["Income certificate", "Application form"]
+                });
+            }
+
+            return mockWaivers;
+        }
+
+        // Real waiver calculation using your API
+        async function handleWaiverCalculation(e) {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+            const data = {
+                faculty: formData.get('faculty'),
+                ssc_gpa: parseFloat(formData.get('ssc_gpa')) || 0,
+                hsc_gpa: parseFloat(formData.get('hsc_gpa')) || 0,
+                is_new_student: true,
+                current_sgpa: 0,
+                student_profile: {
+                    family_income: parseFloat(formData.get('family_income')) || null,
+                    is_freedom_fighter_child: formData.get('is_freedom_fighter_child') === 'on',
+                    is_diu_employee_relative: formData.get('is_diu_employee_relative') === 'on',
+                    has_sports_achievement: formData.get('has_sports_achievement') === 'on',
+                    has_diploma: formData.get('has_diploma') === 'on',
+                    is_international_student: formData.get('is_international_student') === 'on',
+                    group_admission: formData.get('group_admission') === 'on'
+                }
+            };
+
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = '🔄 Calculating...';
+            submitBtn.disabled = true;
+
+            try {
+                console.log('Sending waiver request:', data);
+                const response = await fetch('/waivers/recommend', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`HTTP ${response.status}: ${errorText}`);
+                }
+
+                const waivers = await response.json();
+                console.log('Received waivers:', waivers);
+                displayWaiverResults(waivers);
+            } catch (error) {
+                console.error('Waiver calculation error:', error);
+                const resultsSection = document.getElementById('waiver-results');
+                const cardsContainer = document.getElementById('waiver-cards');
+
+                cardsContainer.innerHTML = `
+                    <div class="card" style="text-align: center; color: #ef4444;">
+                        <h3>⚠️ Calculation Error</h3>
+                        <p>Unable to calculate waivers. Please check:</p>
+                        <ul style="text-align: left; margin: 20px 0;">
+                            <li>FastAPI server is running</li>
+                            <li>All required fields are filled</li>
+                            <li>Faculty is selected</li>
+                        </ul>
+                        <p><strong>Error:</strong> ${error.message}</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('waiver-form').dispatchEvent(new Event('submit'))">Retry</button>
+                    </div>
+                `;
+                resultsSection.classList.remove('hidden');
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        }
+
+        // Mock recommendations
+        function mockRecommendations(data) {
+            const mockDepartments = [
+                {
+                    name: "Computer Science and Engineering",
+                    description: "Focuses on AI, machine learning, software development, and cybersecurity with advanced labs.",
+                    programs: ["B.Sc. in Computer Science and Engineering", "M.Sc. in Computer Science and Engineering"],
+                    faculty: "Faculty of Science and Information Technology",
+                    contact: "cse@diu.edu.bd",
+                    website: "https://cse.daffodilvarsity.edu.bd"
+                },
+                {
+                    name: "Business Administration",
+                    description: "Offers comprehensive education in management, finance, marketing, and entrepreneurship.",
+                    programs: ["Bachelor of Business Administration", "Master of Business Administration"],
+                    faculty: "Faculty of Business and Entrepreneurship",
+                    contact: "bba@diu.edu.bd",
+                    website: "https://business.daffodilvarsity.edu.bd"
+                }
+            ];
+
+            return mockDepartments.map((dept, index) => {
+                let score = 0.7 - (index * 0.1); // Decreasing scores
+                let reasons = ["General match based on your profile"];
+
+                // Simple matching logic
+                if (data.interests.some(interest =>
+                    interest.toLowerCase().includes('computer') ||
+                    interest.toLowerCase().includes('programming') ||
+                    interest.toLowerCase().includes('software')
+                )) {
+                    if (dept.name.includes('Computer Science')) {
+                        score += 0.2;
+                        reasons = ["Strong match with programming and computer interests"];
+                    }
+                }
+
+                if (data.interests.some(interest =>
+                    interest.toLowerCase().includes('business') ||
+                    interest.toLowerCase().includes('management') ||
+                    interest.toLowerCase().includes('finance')
+                )) {
+                    if (dept.name.includes('Business')) {
+                        score += 0.2;
+                        reasons = ["Excellent match with business and management interests"];
+                    }
+                }
+
+                return {
+                    department: dept,
+                    match_score: Math.min(score, 1.0),
+                    reasons: reasons
+                };
+            }).filter(rec => rec.match_score > 0.5)
+              .sort((a, b) => b.match_score - a.match_score);
+        }
+
+        // Real AI recommendations using your backend
+        async function handleRecommendations(e) {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+            const data = {
+                interests: formData.get('interests').split(',').map(i => i.trim()).filter(i => i),
+                academic_background: formData.get('academic_background'),
+                career_goals: formData.get('career_goals').split(',').map(g => g.trim()).filter(g => g),
+                ssc_gpa: parseFloat(formData.get('ssc_gpa')) || 0,
+                hsc_gpa: parseFloat(formData.get('hsc_gpa')) || 0
+            };
+
+            // Validate input
+            if (data.interests.length === 0 || data.career_goals.length === 0 || !data.academic_background) {
+                alert('Please fill in all required fields: interests, academic background, and career goals.');
+                return;
+            }
+
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = '🧠 AI Analyzing...';
+            submitBtn.disabled = true;
+
+            try {
+                console.log('Sending recommendation request:', data);
+                const response = await fetch('/recommendations', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`HTTP ${response.status}: ${errorText}`);
+                }
+
+                const recommendations = await response.json();
+                console.log('Received recommendations:', recommendations);
+
+                if (!recommendations || recommendations.length === 0) {
+                    displayRecommendations([]);
+                } else {
+                    displayRecommendations(recommendations);
+                }
+            } catch (error) {
+                console.error('Recommendation error:', error);
+                const resultsSection = document.getElementById('recommendation-results');
+                const cardsContainer = document.getElementById('recommendation-cards');
+
+                cardsContainer.innerHTML = `
+                    <div class="card" style="text-align: center; color: #ef4444;">
+                        <h3>⚠️ Recommendation Error</h3>
+                        <p>Unable to get AI recommendations. Please check:</p>
+                        <ul style="text-align: left; margin: 20px 0;">
+                            <li>FastAPI server is running</li>
+                            <li>All fields are properly filled</li>
+                            <li>Interests and career goals are separated by commas</li>
+                        </ul>
+                        <p><strong>Error:</strong> ${error.message}</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('recommendation-form').dispatchEvent(new Event('submit'))">Retry</button>
+                    </div>
+                `;
+                resultsSection.classList.remove('hidden');
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        }
+
+        // Mock chat responses
+        function getMockChatResponse(message) {
+            const responses = {
+                'admission': 'For admission requirements, you need HSC certificate with minimum GPA requirements depending on your chosen program. Visit our programs page for specific details.',
+                'waiver': 'We offer various waivers including merit-based (up to 75% for Golden GPA), need-based, and special category waivers. Use our waiver calculator to check your eligibility.',
+                'program': 'We offer 30+ programs including CSE, EEE, BBA, Law, Architecture, and more. Each program has specific requirements and career prospects.',
+                'cost': 'Program costs vary from 400,000 to 750,000 BDT depending on the program. Scholarships and waivers can significantly reduce costs.',
+                'deadline': 'Application deadlines are typically December 31st for most programs. Some programs may have earlier deadlines.',
+                'default': 'Hello! I can help you with admission requirements, program information, waivers, costs, and deadlines. What would you like to know?'
+            };
+
+            const lowerMessage = message.toLowerCase();
+            for (const [key, response] of Object.entries(responses)) {
+                if (key !== 'default' && lowerMessage.includes(key)) {
+                    return response;
+                }
+            }
+            return responses.default;
+        }
+
+        // Real chat using your FAQ system
+        async function handleChatMessage(e) {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+            const message = formData.get('message');
+            const sessionId = Date.now().toString();
+
+            if (!message.trim()) {
+                return;
+            }
+
+            // Add user message to chat
+            addChatMessage(message, 'user');
+
+            // Clear input
+            e.target.reset();
+
+            try {
+                console.log('Sending chat message:', { message, session_id: sessionId });
+                const response = await fetch('/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message, session_id: sessionId })
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`HTTP ${response.status}: ${errorText}`);
+                }
+
+                const result = await response.json();
+                console.log('Received chat response:', result);
+                addChatMessage(result.response, 'bot');
+            } catch (error) {
+                console.error('Chat error:', error);
+                addChatMessage('Sorry, I encountered an error. Please ensure your FastAPI server is running and try again. Error: ' + error.message, 'bot');
+            }
+        }
+
+        // Real application submission
+        async function handleApplicationSubmission(e) {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+            const data = {
+                student_name: formData.get('student_name'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                dob: formData.get('dob'),
+                father_name: formData.get('father_name'),
+                mother_name: formData.get('mother_name'),
+                nid: formData.get('nid'),
+                gender: formData.get('gender'),
+                program_code: formData.get('program_code'),
+                ssc_gpa: parseFloat(formData.get('ssc_gpa')) || 0,
+                hsc_gpa: parseFloat(formData.get('hsc_gpa')) || 0,
+                ssc_year: parseInt(formData.get('ssc_year')) || 0,
+                hsc_year: parseInt(formData.get('hsc_year')) || 0,
+                ssc_board: formData.get('ssc_board'),
+                hsc_board: formData.get('hsc_board'),
+                ssc_group: formData.get('ssc_group'),
+                hsc_group: formData.get('hsc_group'),
+                family_income: parseFloat(formData.get('family_income')) || 0,
+                is_freedom_fighter_child: formData.get('is_freedom_fighter_child') === 'on',
+                is_diu_employee_relative: formData.get('is_diu_employee_relative') === 'on',
+                has_sports_achievement: formData.get('has_sports_achievement') === 'on',
+                has_diploma: formData.get('has_diploma') === 'on',
+                is_international_student: formData.get('is_international_student') === 'on',
+                group_admission: formData.get('group_admission') === 'on',
+                documents_submitted: ['SSC Certificate', 'HSC Certificate', 'Passport Photo']
+            };
+
+            // Basic validation
+            const requiredFields = ['student_name', 'email', 'phone', 'program_code'];
+            for (const field of requiredFields) {
+                if (!data[field]) {
+                    alert(`Please fill in the ${field.replace('_', ' ')} field.`);
+                    return;
+                }
+            }
+
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = '🔄 Submitting...';
+            submitBtn.disabled = true;
+
+            try {
+                console.log('Submitting application:', data);
+                const response = await fetch('/applications', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`HTTP ${response.status}: ${errorText}`);
+                }
+
+                const result = await response.json();
+                console.log('Application submitted successfully:', result);
+                showApplicationSuccess(result);
+            } catch (error) {
+                console.error('Application submission error:', error);
+                alert(`Application submission failed: ${error.message}\n\nPlease check that your FastAPI server is running and all required fields are filled correctly.`);
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        }
+
+        // Remove all mock data functions since we're using real APIs
+        // Initialize with proper error handling
+        window.addEventListener('load', function() {
+            showPage('home');
+
+            // Test API connection
+            fetch('/programs')
+                .then(response => {
+                    if (!response.ok) {
+                        console.warn('FastAPI server may not be running on expected port');
+                    } else {
+                        console.log('Successfully connected to FastAPI backend');
+                    }
+                })
+                .catch(error => {
+                    console.warn('Unable to connect to FastAPI backend:', error.message);
+                });
+        });
+    </script>
 </body>
 </html>
