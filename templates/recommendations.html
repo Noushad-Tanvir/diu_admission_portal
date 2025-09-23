@@ -1,0 +1,85 @@
+<!-- Recommendations page -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIU Recommendations</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="/static/css/styles.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <nav class="navbar text-white p-4">
+        <div class="container mx-auto flex justify-between">
+            <h1 class="text-2xl font-bold">DIU Admission Portal</h1>
+            <div>
+                <a href="/" class="mx-2">Home</a>
+                <a href="/programs_page" class="mx-2">Programs</a>
+                <a href="/waivers_page" class="mx-2">Waivers</a>
+                <a href="/application_page" class="mx-2">Application</a>
+                <a href="/chat_page" class="mx-2">Chat</a>
+                <a href="/dashboard_page" class="mx-2">Dashboard</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container mx-auto p-8">
+        <h2 class="text-3xl font-bold mb-4">Department Recommendations</h2>
+        <form id="recommend-form" class="space-y-4">
+            <div>
+                <label class="block">Interests (comma-separated):</label>
+                <input type="text" name="interests" class="form-input" placeholder="e.g., AI, software development">
+            </div>
+            <div>
+                <label class="block">Academic Background:</label>
+                <input type="text" name="academic_background" class="form-input" placeholder="e.g., Science">
+            </div>
+            <div>
+                <label class="block">Career Goals (comma-separated):</label>
+                <input type="text" name="career_goals" class="form-input" placeholder="e.g., Data Scientist, Software Engineer">
+            </div>
+            <div>
+                <label class="block">SSC GPA:</label>
+                <input type="number" name="ssc_gpa" step="0.01" min="0" max="5" class="form-input">
+            </div>
+            <div>
+                <label class="block">HSC GPA:</label>
+                <input type="number" name="hsc_gpa" step="0.01" min="0" max="5" class="form-input">
+            </div>
+            <button type="submit" class="btn-primary">Get Recommendations</button>
+        </form>
+        <div id="recommend-results" class="mt-4"></div>
+    </div>
+    <script>
+        document.getElementById('recommend-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = {
+                interests: formData.get('interests').split(',').map(i => i.trim()),
+                academic_background: formData.get('academic_background'),
+                career_goals: formData.get('career_goals').split(',').map(g => g.trim()),
+                ssc_gpa: parseFloat(formData.get('ssc_gpa')) || 0,
+                hsc_gpa: parseFloat(formData.get('hsc_gpa')) || 0
+            };
+            try {
+                const response = await fetch('/recommendations', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const results = await response.json();
+                const resultsDiv = document.getElementById('recommend-results');
+                resultsDiv.innerHTML = results.map(r => `
+                    <div class="card bg-white p-4 rounded shadow mb-2">
+                        <p><strong>${r.department.name}</strong></p>
+                        <p>${r.department.description}</p>
+                        <p>Match Score: ${(r.match_score * 100).toFixed(2)}%</p>
+                        <p>Reasons: ${r.reasons.join(', ')}</p>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+    </script>
+</body>
+</html>

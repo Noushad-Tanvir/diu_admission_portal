@@ -1,0 +1,18 @@
+# Python virtual environment
+venv/
+__pycache__/
+*.pyc
+
+# SQLite database
+diu_admissions.db
+
+# Log files
+app.log
+
+# IDE and editor files
+.vscode/
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db

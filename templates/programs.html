@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIU Programs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="/static/css/styles.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <nav class="navbar text-white p-4">
+        <div class="container mx-auto flex justify-between">
+            <h1 class="text-2xl font-bold">DIU Admission Portal</h1>
+            <div>
+                <a href="/" class="mx-2">Home</a>
+                <a href="/waivers_page" class="mx-2">Waivers</a>
+                <a href="/recommendations_page" class="mx-2">Recommendations</a>
+                <a href="/application_page" class="mx-2">Application</a>
+                <a href="/chat_page" class="mx-2">Chat</a>
+                <a href="/dashboard_page" class="mx-2">Dashboard</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container mx-auto p-8">
+        <h2 class="text-3xl font-bold mb-4">Programs</h2>
+        <div id="programs-list" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+    </div>
+    <script src="/static/js/scripts.js"></script>
+    <script>
+        window.onload = fetchPrograms;
+    </script>
+</body>
+</html>

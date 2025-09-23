@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIU Application</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="/static/css/styles.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <nav class="navbar text-white p-4">
+        <div class="container mx-auto flex justify-between">
+            <h1 class="text-2xl font-bold">DIU Admission Portal</h1>
+            <div>
+                <a href="/" class="mx-2">Home</a>
+                <a href="/programs_page" class="mx-2">Programs</a>
+                <a href="/waivers_page" class="mx-2">Waivers</a>
+                <a href="/recommendations_page" class="mx-2">Recommendations</a>
+                <a href="/chat_page" class="mx-2">Chat</a>
+                <a href="/dashboard_page" class="mx-2">Dashboard</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container mx-auto p-8">
+        <h2 class="text-3xl font-bold mb-4">Application Form</h2>
+        <form id="application-form" class="space-y-4">
+            <div>
+                <label class="block">Student Name:</label>
+                <input type="text" name="student_name" class="form-input" required>
+            </div>
+            <div>
+                <label class="block">Email:</label>
+                <input type="email" name="email" class="form-input" required>
+            </div>
+            <div>
+                <label class="block">Phone:</label>
+                <input type="text" name="phone" class="form-input" required>
+            </div>
+            <div>
+                <label class="block">Date of Birth:</label>
+                <input type="date" name="dob" class="form-input" required>
+            </div>
+            <div>
+                <label class="block">Father's Name:</label>
+                <input type="text" name="father_name" class="form-input">
+            </div>
+            <div>
+                <label class="block">Mother's Name:</label>
+                <input type="text" name="mother_name" class="form-input">
+            </div>
+            <div>
+                <label class="block">NID:</label>
+                <input type="text" name="nid" class="form-input" required>
+            </div>
+            <div>
+                <label class="block">Gender:</label>
+                <select name="gender" class="form-input">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div>
+                <label class="block">Program Code:</label>
+                <input type="text" name="program_code" class="form-input" required>
+            </div>
+            <div>
+                <label class="block">SSC GPA:</label>
+                <input type="number" name="ssc_gpa" step="0.01" min="0" max="5" class="form-input">
+            </div>
+            <div>
+                <label class="block">HSC GPA:</label>
+                <input type="number" name="hsc_gpa" step="0.01" min="0" max="5" class="form-input">
+            </div>
+            <div>
+                <label class="block">SSC Year:</label>
+                <input type="number" name="ssc_year" class="form-input" required>
+            </div>
+            <div>
+                <label class="block">HSC Year:</label>
+                <input type="number" name="hsc_year" class="form-input" required>
+            </div>
+            <div>
+                <label class="block">SSC Board:</label>
+                <input type="text" name="ssc_board" class="form-input">
+            </div>
+            <div>
+                <label class="block">HSC Board:</label>
+                <input type="text" name="hsc_board" class="form-input">
+            </div>
+            <div>
+                <label class="block">SSC Group:</label>
+                <input type="text" name="ssc_group" class="form-input">
+            </div>
+            <div>
+                <label class="block">HSC Group:</label>
+                <input type="text" name="hsc_group" class="form-input">
+            </div>
+            <div>
+                <label class="block">Family Income:</label>
+                <input type="number" name="family_income" class="form-input">
+            </div>
+            <div>
+                <label class="block">Freedom Fighter Child:</label>
+                <input type="checkbox" name="is_freedom_fighter_child" class="form-input">
+            </div>
+            <div>
+                <label class="block">DIU Employee Relative:</label>
+                <input type="checkbox" name="is_diu_employee_relative" class="form-input">
+            </div>
+            <div>
+                <label class="block">Sports Achievement:</label>
+                <input type="checkbox" name="has_sports_achievement" class="form-input">
+            </div>
+            <div>
+                <label class="block">Diploma Holder:</label>
+                <input type="checkbox" name="has_diploma" class="form-input">
+            </div>
+            <div>
+                <label class="block">International Student:</label>
+                <input type="checkbox" name="is_international_student" class="form-input">
+            </div>
+            <div>
+                <label class="block">Group Admission:</label>
+                <input type="checkbox" name="group_admission" class="form-input">
+            </div>
+            <button type="submit" class="btn-primary">Submit Application</button>
+        </form>
+        <div id="application-result" class="mt-4"></div>
+    </div>
+    <script>
+        document.getElementById('application-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = {
+                student_name: formData.get('student_name'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                dob: formData.get('dob'),
+                father_name: formData.get('father_name') || '',
+                mother_name: formData.get('mother_name') || '',
+                nid: formData.get('nid'),
+                gender: formData.get('gender'),
+                program_code: formData.get('program_code'),
+                ssc_gpa: parseFloat(formData.get('ssc_gpa')) || null,
+                hsc_gpa: parseFloat(formData.get('hsc_gpa')) || null,
+                ssc_year: parseInt(formData.get('ssc_year')),
+                hsc_year: parseInt(formData.get('hsc_year')),
+                ssc_board: formData.get('ssc_board') || '',
+                hsc_board: formData.get('hsc_board') || '',
+                ssc_group: formData.get('ssc_group') || '',
+                hsc_group: formData.get('hsc_group') || '',
+                family_income: parseFloat(formData.get('family_income')) || null,
+                is_freedom_fighter_child: formData.get('is_freedom_fighter_child') === 'on',
+                is_diu_employee_relative: formData.get('is_diu_employee_relative') === 'on',
+                has_sports_achievement: formData.get('has_sports_achievement') === 'on',
+                has_diploma: formData.get('has_diploma') === 'on',
+                is_international_student: formData.get('is_international_student') === 'on',
+                group_admission: formData.get('group_admission') === 'on',
+                documents_submitted: []
+            };
+            try {
+                const response = await fetch('/applications', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+                document.getElementById('application-result').innerHTML = `
+                    <div class="card bg-white p-4 rounded shadow">
+                        <p>Application Submitted! ID: ${result.id}</p>
+                        <p>Status: ${result.application_status}</p>
+                    </div>
+                `;
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('application-result').innerHTML = `<p class="text-red-500">Error submitting application</p>`;
+            }
+        });
+    </script>
+</body>
+</html>

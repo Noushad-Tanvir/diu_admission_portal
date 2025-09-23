@@ -1,0 +1,122 @@
+[
+  {
+    "id": "result-based_golden_gpa-5_both_ssc_hsc",
+    "name": "Golden GPA-5 (Both SSC & HSC)",
+    "category": "Result-Based Waivers",
+    "description": "75% tuition waiver for students achieving Golden GPA 5.0 in both SSC and HSC exams.",
+    "waiver_rate": "75%",
+    "eligibility_criteria": ["SSC GPA 5.0", "HSC GPA 5.0", "Maintain SGPA 3.5"],
+    "required_documents": ["SSC transcript", "HSC transcript", "Application form"],
+    "deadline": "Not specified",
+    "applicable_programs": ["ICE", "EEE", "TE", "BBA", "ENG", "PH", "SWE", "CE", "ESM", "THM", "NFE", "JMC", "MCT", "CIS", "BCOM", "ETE"],
+    "sgpa_required": 3.5
+  },
+  {
+    "id": "result-based_golden_gpa-5_hsc_only",
+    "name": "Golden GPA-5 (HSC Only)",
+    "category": "Result-Based Waivers",
+    "description": "50% tuition waiver for students with Golden GPA 5.0 in HSC exams.",
+    "waiver_rate": "50%",
+    "eligibility_criteria": ["HSC GPA 5.0", "Maintain SGPA 3.5"],
+    "required_documents": ["HSC transcript", "Application form"],
+    "deadline": "Not specified",
+    "applicable_programs": ["ICE", "EEE", "TE", "BBA", "ENG", "PH", "SWE", "CE", "ESM", "THM", "NFE", "JMC", "MCT", "CIS", "BCOM", "ETE"],
+    "sgpa_required": 3.5
+  },
+  {
+    "id": "result-based_hsc_gpa_4.90-4.99",
+    "name": "HSC GPA 4.90-4.99",
+    "category": "Result-Based Waivers",
+    "description": "25% tuition waiver for students with HSC GPA between 4.90 and 4.99.",
+    "waiver_rate": "25%",
+    "eligibility_criteria": ["HSC GPA 4.90-4.99", "Maintain SGPA 3.25"],
+    "required_documents": ["HSC transcript", "Application form"],
+    "deadline": "Not specified",
+    "applicable_programs": ["ICE", "EEE", "TE", "BBA", "ENG", "PH", "SWE", "CE", "ESM", "THM", "NFE", "JMC", "MCT", "CIS", "BCOM", "ETE"],
+    "sgpa_required": 3.25
+  },
+  {
+    "id": "need-based_waiver",
+    "name": "Need-Based Waiver",
+    "category": "Need-Based Waivers",
+    "description": "10-20% tuition waiver for students with demonstrated financial need.",
+    "waiver_rate": ["10%", "20%"],
+    "eligibility_criteria": ["Family income below 50,000 BDT/month", "Submit income certificate"],
+    "required_documents": ["Income certificate", "Application form"],
+    "deadline": "Not specified",
+    "applicable_programs": ["ICE", "CSE", "EEE", "TE", "BBA", "LLB", "B.PHARM", "B.ARCH", "ENG", "PH", "SWE", "CE", "ESM", "THM", "NFE", "JMC", "MCT", "CIS", "BCOM", "ETE", "MSCSE", "MBA", "LLM", "MPHARM", "MAENG", "MSSJMC", "MPH"],
+    "sgpa_required": 0.0
+  },
+  {
+    "id": "freedom_fighter_quota",
+    "name": "Freedom Fighter Quota Waiver",
+    "category": "Special Quota Waivers",
+    "description": "50% tuition waiver for children of freedom fighters.",
+    "waiver_rate": "50%",
+    "eligibility_criteria": ["Child of freedom fighter", "Maintain SGPA 3.0"],
+    "required_documents": ["Freedom fighter certificate", "Birth certificate", "Application form"],
+    "deadline": "Not specified",
+    "applicable_programs": ["ICE", "CSE", "EEE", "TE", "BBA", "LLB", "B.PHARM", "B.ARCH", "ENG", "PH", "SWE", "CE", "ESM", "THM", "NFE", "JMC", "MCT", "CIS", "BCOM", "ETE", "MSCSE", "MBA", "LLM", "MPHARM", "MAENG", "MSSJMC", "MPH"],
+    "sgpa_required": 3.0
+  },
+  {
+    "id": "diu_employee_relative",
+    "name": "DIU Employee/Relative Waiver",
+    "category": "Special Quota Waivers",
+    "description": "15-25% tuition waiver for DIU employees or their immediate relatives.",
+    "waiver_rate": ["15%", "25%"],
+    "eligibility_criteria": ["DIU employee or immediate relative", "Maintain SGPA 3.0"],
+    "required_documents": ["Employment certificate", "Relationship proof", "Application form"],
+    "deadline": "Not specified",
+    "applicable_programs": ["ICE", "CSE", "EEE", "TE", "BBA", "LLB", "B.PHARM", "B.ARCH", "ENG", "PH", "SWE", "CE", "ESM", "THM", "NFE", "JMC", "MCT", "CIS", "BCOM", "ETE", "MSCSE", "MBA", "LLM", "MPHARM", "MAENG", "MSSJMC", "MPH"],
+    "sgpa_required": 3.0
+  },
+  {
+    "id": "sports_achievement_waiver",
+    "name": "Sports Achievement Waiver",
+    "category": "Special Achievement Waivers",
+    "description": "20% tuition waiver for students with national or premier division sports achievements.",
+    "waiver_rate": "20%",
+    "eligibility_criteria": ["National or premier division sports achievement", "Maintain SGPA 2.5"],
+    "required_documents": ["Sports certificate", "Application form"],
+    "deadline": "Not specified",
+    "applicable_programs": ["ICE", "CSE", "EEE", "TE", "BBA", "LLB", "B.PHARM", "B.ARCH", "ENG", "PH", "SWE", "CE", "ESM", "THM", "NFE", "JMC", "MCT", "CIS", "BCOM", "ETE", "MSCSE", "MBA", "LLM", "MPHARM", "MAENG", "MSSJMC", "MPH"],
+    "sgpa_required": 2.5
+  },
+  {
+    "id": "diploma_holder_waiver",
+    "name": "Diploma Holder Waiver",
+    "category": "Special Quota Waivers",
+    "description": "30% tuition waiver for students with a diploma in relevant technical fields.",
+    "waiver_rate": "30%",
+    "eligibility_criteria": ["Diploma in relevant field", "Maintain SGPA 3.0"],
+    "required_documents": ["Diploma certificate", "Application form"],
+    "deadline": "Not specified",
+    "applicable_programs": ["ICE", "EEE", "TE", "SWE", "CE", "ETE"],
+    "sgpa_required": 3.0
+  },
+  {
+    "id": "group_admission_waiver",
+    "name": "Group Admission Waiver",
+    "category": "Special Quota Waivers",
+    "description": "10% tuition waiver for students admitted in groups of 5 or more.",
+    "waiver_rate": "10%",
+    "eligibility_criteria": ["Group admission of 5 or more students", "Maintain SGPA 2.5"],
+    "required_documents": ["Group admission proof", "Application form"],
+    "deadline": "Not specified",
+    "applicable_programs": ["ICE", "CSE", "EEE", "TE", "BBA", "LLB", "B.PHARM", "B.ARCH", "ENG", "PH", "SWE", "CE", "ESM", "THM", "NFE", "JMC", "MCT", "CIS", "BCOM", "ETE", "MSCSE", "MBA", "LLM", "MPHARM", "MAENG", "MSSJMC", "MPH"],
+    "sgpa_required": 2.5
+  },
+  {
+    "id": "international_student_waiver",
+    "name": "International Student Waiver",
+    "category": "Special Quota Waivers",
+    "description": "15% tuition waiver for international students enrolled at DIU.",
+    "waiver_rate": "15%",
+    "eligibility_criteria": ["International student status", "Maintain SGPA 2.5"],
+    "required_documents": ["Passport copy", "Application form"],
+    "deadline": "Not specified",
+    "applicable_programs": ["ICE", "CSE", "EEE", "TE", "BBA", "LLB", "B.PHARM", "B.ARCH", "ENG", "PH", "SWE", "CE", "ESM", "THM", "NFE", "JMC", "MCT", "CIS", "BCOM", "ETE", "MSCSE", "MBA", "LLM", "MPHARM", "MAENG", "MSSJMC", "MPH"],
+    "sgpa_required": 2.5
+  }
+]
